@@ -3,18 +3,20 @@ package ar.unrn.parcial1.modelo;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.HashMap;
+import java.util.List;
 
 public class SistemaCompras extends Observable implements RepositorioCompras {
 
-	private PersistenciaCompras persistencia;
 	private TipoRegistro tipoRegistro;
-	private ServiciosDeCompras servicio;
 
-	public SistemaCompras(PersistenciaCompras persistencia, TipoRegistro tipoRegistro, ServiciosDeCompras servicio) {
+	public SistemaCompras(TipoRegistro tipoRegistro, List<Observer> observadores) {
 
-		this.persistencia = persistencia;
 		this.tipoRegistro = tipoRegistro;
-		this.servicio = servicio;
+
+		for (Observer observer : observadores) {
+			this.agregarObservador(observer);
+		}
 	}
 
 	@Override
@@ -22,10 +24,9 @@ public class SistemaCompras extends Observable implements RepositorioCompras {
 
 		Compra compra = new Compra(cantidad, remera, email);
 
-		// compra.nuevaCompra(this.tipoRegistro.crear(cantidad, fecha,
-		// compra.calcular(fecha, cantidad)));
+		// notificar aca, usar el hasmap para enviar los datos
 
-		this.persistencia.registrar(this.tipoRegistro.crear(cantidad, fecha, compra.calcular(fecha, cantidad)));
+		HashMap<String, String> map = new HashMap<String, String>();
 
 		String contenidoMail = "Este es el detalle de su compra --> " + System.lineSeparator() + System.lineSeparator()
 				+ ". La fecha y hora de su compra fue: "
@@ -36,7 +37,12 @@ public class SistemaCompras extends Observable implements RepositorioCompras {
 
 				+ "Muchas Gracias!!!";
 
-		this.servicio.enviarMail(email, "Detalle de Compra", contenidoMail);
+		map.put("Registro", this.tipoRegistro.crear(cantidad, fecha, compra.calcular(fecha, cantidad)));
+		map.put("Email", email);
+		map.put("Asunto", "Detalle de Compra");
+		map.put("ContenidoEmail", contenidoMail);
+
+		this.notificar(map);
 
 	}
 

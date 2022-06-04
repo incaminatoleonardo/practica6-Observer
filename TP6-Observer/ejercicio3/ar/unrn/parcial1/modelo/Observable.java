@@ -1,6 +1,7 @@
 package ar.unrn.parcial1.modelo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Observable {
@@ -16,9 +17,9 @@ public class Observable {
 		this.observadores.add(observador);
 	}
 
-	public void notificar(String valor) {
+	public void notificar(HashMap<String, String> map) {
 		for (Observer observer : observadores) {
-			observer.actualizar(valor);
+			observer.actualizar(map);
 		}
 	}
 

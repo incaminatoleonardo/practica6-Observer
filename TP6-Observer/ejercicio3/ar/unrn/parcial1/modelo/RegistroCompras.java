@@ -1,5 +1,7 @@
 package ar.unrn.parcial1.modelo;
 
+import java.util.HashMap;
+
 public class RegistroCompras implements Observer {
 
 	private PersistenciaCompras persistencia;
@@ -10,8 +12,8 @@ public class RegistroCompras implements Observer {
 	}
 
 	@Override
-	public void actualizar(String valor) {
-		persistencia.registrar(valor);
+	public void actualizar(HashMap<String, String> map) {
+		persistencia.registrar(map.get("Registro"));
 
 	}
 

@@ -1,14 +1,11 @@
-package tp6.ejercicio1.modelo;
+package tp6.ejercicio2.modelo;
 
-import java.util.List;
-
-public class Medidor extends Observable {
+public class Medidor implements Mediciones {
 
 	private String temperatura;
 	private ClimaOnline clima;
 
-	public Medidor(List<Observer> observadores, ClimaOnline clima) {
-		super(observadores);
+	public Medidor(ClimaOnline clima) {
 		this.clima = clima;
 	}
 
@@ -16,16 +13,15 @@ public class Medidor extends Observable {
 //		// leo la temperatura del servicio web
 //		this.temperatura = this.clima.temperatura();
 //
-//
 //		return this.temperatura;
 //	}
 
-	public void leerTemperatura() {
+	public String leerTemperatura() {
 		// leo la temperatura del servicio web
 		this.temperatura = this.clima.temperatura();
 
-		this.notificar(this.temperatura);
-
+		// this.notificar(this.temperatura);
+		return this.temperatura;
 	}
 
 }

@@ -2,13 +2,13 @@ package ar.unrn.parcial1.modelo;
 
 import java.time.LocalDateTime;
 
-public class Compra extends Observable {
+public class Compra {
 
 	private Cantidad cantRemeras;
 	private Remeras remera;
 	private Email email;
 
-	public Compra(String cantRemeras, String remera, String email/* , List<Observer> observadores */) {
+	public Compra(String cantRemeras, String remera, String email) {
 
 		this.cantRemeras = new Cantidad(cantRemeras);
 
@@ -20,20 +20,12 @@ public class Compra extends Observable {
 		if (remera.equals("Remera Estampada")) {
 			this.remera = new Estampada();
 		}
-//		for (Observer observer : observadores) {
-//			this.agregarObservador(observer);
-//		}
 
 	}
 
 	public double calcular(LocalDateTime fechaCompra, String cantidad) {
 
 		return remera.calcularPrecio(fechaCompra, Integer.parseInt(cantidad));
-	}
-
-	public void nuevaCompra(String valor) {
-		this.notificar(valor);
-
 	}
 
 }

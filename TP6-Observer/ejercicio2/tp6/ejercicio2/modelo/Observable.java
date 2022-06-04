@@ -1,4 +1,4 @@
-package tp6.ejercicio1.modelo;
+package tp6.ejercicio2.modelo;
 
 import java.util.ArrayList;
 import java.util.List;

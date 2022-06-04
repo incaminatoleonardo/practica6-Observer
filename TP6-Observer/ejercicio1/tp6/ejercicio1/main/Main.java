@@ -17,9 +17,11 @@ public class Main {
 		File file = new File(
 				"C:\\Users\\Frodo\\Desktop\\Uni\\Objetos 2\\RegistrosDeTrabajos\\tp6-RegistroTemperatura.txt");
 
-		Medidor medidor = new Medidor(new WeatherChannelService(),
-				List.of(new ConsolaNotificacionTemperatura(new SistemaConsola()),
-						new RegistroTemperatura(new EnDiscoPersistirTemperatura(file))));
+//		Medidor medidor = new Medidor(List.of(new ConsolaNotificacionTemperatura(new SistemaConsola()),
+//				new RegistroTemperatura(new EnDiscoPersistirTemperatura(file))), new WeatherChannelService());
+
+		Medidor medidor = new Medidor(List.of(new ConsolaNotificacionTemperatura(new SistemaConsola()),
+				new RegistroTemperatura(new EnDiscoPersistirTemperatura(file))), new WeatherChannelService());
 
 		medidor.leerTemperatura();
 	}

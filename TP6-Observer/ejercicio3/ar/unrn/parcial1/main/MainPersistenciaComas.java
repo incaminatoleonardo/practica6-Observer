@@ -1,8 +1,11 @@
 package ar.unrn.parcial1.main;
 
 import java.awt.EventQueue;
+import java.util.List;
 
+import ar.unrn.parcial1.modelo.NotificarViaMail;
 import ar.unrn.parcial1.modelo.PersistenciaCompras;
+import ar.unrn.parcial1.modelo.RegistroCompras;
 import ar.unrn.parcial1.modelo.RegistroConComas;
 import ar.unrn.parcial1.modelo.RepositorioCompras;
 import ar.unrn.parcial1.modelo.ServiciosDeCompras;
@@ -22,7 +25,8 @@ public class MainPersistenciaComas {
 		TipoRegistro registroComas = new RegistroConComas();
 		ServiciosDeCompras servicioMail = new ServicioMails();
 
-		RepositorioCompras sistemaCompra = new SistemaCompras(persistenciaCompras, registroComas, servicioMail);
+		RepositorioCompras sistemaCompra = new SistemaCompras(registroComas,
+				List.of(new RegistroCompras(persistenciaCompras), new NotificarViaMail(servicioMail)));
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

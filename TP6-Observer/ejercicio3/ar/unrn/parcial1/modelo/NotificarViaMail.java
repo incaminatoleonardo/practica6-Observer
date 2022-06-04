@@ -1,5 +1,7 @@
 package ar.unrn.parcial1.modelo;
 
+import java.util.HashMap;
+
 public class NotificarViaMail implements Observer {
 
 	private ServiciosDeCompras servicio;
@@ -10,9 +12,8 @@ public class NotificarViaMail implements Observer {
 	}
 
 	@Override
-	public void actualizar(String valor) {
-		servicio.enviarMail("Mail del usuario, no se como traerlo", "asunto- es estatico asi que no hay problema",
-				valor);
+	public void actualizar(HashMap<String, String> map) {
+		servicio.enviarMail(map.get("Email"), map.get("Asunto"), map.get("ContenidoEmail"));
 
 	}
 
